@@ -6,6 +6,7 @@ from .quick_info import TypescriptQuickInfo, TypescriptQuickInfoDoc
 from .save import TypescriptSave
 from .show_doc import TypescriptShowDoc
 from .signature import TypescriptSignaturePanel, TypescriptSignaturePopup
+from .adapt_theme import TypescriptAdaptColorThemeCommand
 from .format import (
     TypescriptFormatBrackets,
     TypescriptFormatDocument,
@@ -54,5 +55,6 @@ __all__ = [
     "TypescriptSave",
     "TypescriptShowDoc",
     "TypescriptSignaturePanel",
-    "TypescriptSignaturePopup"
+    "TypescriptSignaturePopup",
+    "TypescriptAdaptColorThemeCommand"
 ]
