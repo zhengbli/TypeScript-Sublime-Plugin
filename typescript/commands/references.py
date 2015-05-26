@@ -17,8 +17,12 @@ class TypescriptFindReferencesCommand(TypeScriptBaseTextCommand):
             line = str(cursor[0] + 1)
             args = {"line": line, "filename": self.view.file_name(), "referencesRespBody": references_resp["body"]}
             args_json_str = json_helpers.encode(args)
-            ref_view = get_ref_view()
+            if IS_ST2:
+                ref_view = get_ref_view()
+            else:
+                ref_view = active_window().create_output_panel("ref_view")
             ref_view.run_command('typescript_populate_refs', {"argsJson": args_json_str})
+            active_window().run_command("show_panel", {"panel": "output.ref_view"})
 
 
 class TypescriptGoToRefCommand(sublime_plugin.TextCommand):
