@@ -115,7 +115,9 @@ class NodeCommClient(CommClient):
             # Force the callback to be called if it is not triggered
             # in 2s
             if seq in self.asyncReq:
-                self.asyncReq[seq](self.makeTimeoutMsg(cmd, seq))
+                callback = asyncReq.pop(request_seq, None)
+                if callback:
+                    callback(self.makeTimeoutMsg(cmd, seq))
 
         sublime.set_timeout(check_if_executed, 2000)
 
