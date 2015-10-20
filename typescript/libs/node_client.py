@@ -111,6 +111,14 @@ class NodeCommClient(CommClient):
         if self.postCmd(cmd):
             self.asyncReq[seq] = cb
 
+        def check_if_executed():
+            # Force the callback to be called if it is not triggered
+            # in 2s
+            if seq in self.asyncReq:
+                self.asyncReq[seq](self.makeTimeoutMsg(cmd, seq))
+
+        sublime.set_timeout(check_if_executed, 2000)
+
     def sendCmdSync(self, cmd, seq):
         """
         Sends the command and wait for the result and returns it
